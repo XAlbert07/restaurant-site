@@ -1,0 +1,208 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap");
+
+/* ===== DESIGN TOKENS ===== */
+@layer base {
+  :root {
+    --background: 20 10% 8%;
+    --foreground: 45 30% 90%;
+
+    --card: 20 12% 12%;
+    --card-foreground: 45 30% 90%;
+
+    --primary: 43 74% 49%;
+    --primary-foreground: 20 10% 8%;
+
+    --secondary: 20 15% 18%;
+    --secondary-foreground: 45 30% 90%;
+
+    --muted: 20 10% 20%;
+    --muted-foreground: 45 15% 55%;
+
+    --border: 43 25% 25%;
+    --ring: 43 74% 49%;
+
+    --gold: 43 74% 49%;
+    --gold-light: 43 80% 65%;
+    --gold-dark: 43 70% 35%;
+
+    --gradient-gold: linear-gradient(
+      135deg,
+      hsl(var(--gold)),
+      hsl(var(--gold-light))
+    );
+  }
+}
+
+/* ===== BASE ===== */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Lato", sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Playfair Display", serif;
+  }
+}
+
+/* ===== COMPONENTS ===== */
+@layer components {
+  .text-gradient-gold {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .glass-card {
+    background: hsl(var(--card) / 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--gold) / 0.2);
+  }
+
+  .navbar-scrolled {
+    @apply bg-background/95 backdrop-blur-md border-b border-primary/20;
+  }
+
+  .nav-link {
+    @apply relative font-light text-sm tracking-widest uppercase
+           text-foreground/80 hover:text-primary
+           transition-colors duration-300;
+  }
+
+  .nav-link::after {
+    content: "";
+    @apply absolute left-0 -bottom-1 w-0 h-px bg-primary transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .mobile-link {
+    @apply block font-light text-lg tracking-widest uppercase
+           text-foreground/80 hover:text-primary
+           transition-colors py-2;
+  }
+
+  .hero-subtitle {
+    @apply text-primary font-light tracking-[0.3em] uppercase
+           text-sm md:text-base mb-6;
+  }
+
+  .hero-title {
+    @apply text-5xl md:text-7xl lg:text-8xl mb-6;
+  }
+
+  .hero-description {
+    @apply text-foreground/80 font-light text-lg md:text-xl
+           max-w-2xl mx-auto mb-12 leading-relaxed;
+  }
+
+  .hero-divider {
+    @apply w-32 h-px mx-auto mb-8;
+    background: linear-gradient(
+      to right,
+      transparent,
+      hsl(var(--primary)),
+      transparent
+    );
+  }
+
+  .hero-btn-outline {
+    @apply relative px-8 py-4 overflow-hidden
+           border border-primary/50 transition-colors;
+  }
+
+  .hero-btn-primary {
+    @apply relative px-8 py-4 overflow-hidden bg-primary;
+  }
+
+  .hero-btn-bg {
+    @apply absolute inset-0 translate-y-full transition-transform duration-300;
+    background: hsl(var(--primary));
+  }
+
+  .hero-btn-primary .hero-btn-bg {
+    background: hsl(var(--gold-light));
+  }
+
+  .group:hover .hero-btn-bg {
+    transform: translateY(0);
+  }
+
+  .hero-btn-text {
+    @apply relative font-light tracking-widest uppercase text-sm transition-colors;
+  }
+
+  .hero-btn-outline .hero-btn-text {
+    @apply text-primary group-hover:text-primary-foreground;
+  }
+
+  .hero-btn-primary .hero-btn-text {
+    @apply text-primary-foreground;
+  }
+}
+
+/* ===== UTILITIES ===== */
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}
