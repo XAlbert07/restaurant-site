@@ -2,9 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap");
+/* ===============================
+   GOOGLE FONTS
+================================ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap');
 
-/* ===== DESIGN TOKENS ===== */
+/* ===============================
+   DESIGN SYSTEM – RESTAURANT
+================================ */
 @layer base {
   :root {
     --background: 20 10% 8%;
@@ -22,13 +27,21 @@
     --muted: 20 10% 20%;
     --muted-foreground: 45 15% 55%;
 
+    --accent: 350 45% 35%;
+    --accent-foreground: 45 30% 95%;
+
     --border: 43 25% 25%;
+    --input: 20 15% 20%;
     --ring: 43 74% 49%;
 
+    --radius: 0.5rem;
+
+    /* Custom tokens */
     --gold: 43 74% 49%;
     --gold-light: 43 80% 65%;
     --gold-dark: 43 70% 35%;
 
+    /* Gradients */
     --gradient-gold: linear-gradient(
       135deg,
       hsl(var(--gold)),
@@ -37,7 +50,9 @@
   }
 }
 
-/* ===== BASE ===== */
+/* ===============================
+   BASE STYLES
+================================ */
 @layer base {
   * {
     @apply border-border;
@@ -49,21 +64,23 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: "Lato", sans-serif;
+    font-family: 'Lato', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: "Playfair Display", serif;
+    font-family: 'Playfair Display', serif;
   }
 }
 
-/* ===== COMPONENTS ===== */
+/* ===============================
+   COMPONENTS
+================================ */
 @layer components {
   .text-gradient-gold {
     background: var(--gradient-gold);
     -webkit-background-clip: text;
-    background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .glass-card {
@@ -72,91 +89,33 @@
     border: 1px solid hsl(var(--gold) / 0.2);
   }
 
-  .navbar-scrolled {
-    @apply bg-background/95 backdrop-blur-md border-b border-primary/20;
+  .underline-hover {
+    @apply absolute -bottom-1 left-0 h-px bg-primary w-0 transition-all duration-300;
   }
 
-  .nav-link {
-    @apply relative font-light text-sm tracking-widest uppercase
-           text-foreground/80 hover:text-primary
-           transition-colors duration-300;
+  .nav-item:hover .underline-hover {
+    @apply w-full;
   }
 
-  .nav-link::after {
-    content: "";
-    @apply absolute left-0 -bottom-1 w-0 h-px bg-primary transition-all duration-300;
-  }
 
-  .nav-link:hover::after {
-    width: 100%;
+  .nav-item {
+    @apply text-foreground/80 hover:text-primary;
   }
 
   .mobile-link {
-    @apply block font-light text-lg tracking-widest uppercase
+    @apply font-light text-lg tracking-widest uppercase
            text-foreground/80 hover:text-primary
-           transition-colors py-2;
+           transition-colors;
   }
 
-  .hero-subtitle {
-    @apply text-primary font-light tracking-[0.3em] uppercase
-           text-sm md:text-base mb-6;
-  }
-
-  .hero-title {
-    @apply text-5xl md:text-7xl lg:text-8xl mb-6;
-  }
-
-  .hero-description {
-    @apply text-foreground/80 font-light text-lg md:text-xl
-           max-w-2xl mx-auto mb-12 leading-relaxed;
-  }
-
-  .hero-divider {
-    @apply w-32 h-px mx-auto mb-8;
-    background: linear-gradient(
-      to right,
-      transparent,
-      hsl(var(--primary)),
-      transparent
-    );
-  }
-
-  .hero-btn-outline {
-    @apply relative px-8 py-4 overflow-hidden
-           border border-primary/50 transition-colors;
-  }
-
-  .hero-btn-primary {
-    @apply relative px-8 py-4 overflow-hidden bg-primary;
-  }
-
-  .hero-btn-bg {
-    @apply absolute inset-0 translate-y-full transition-transform duration-300;
-    background: hsl(var(--primary));
-  }
-
-  .hero-btn-primary .hero-btn-bg {
-    background: hsl(var(--gold-light));
-  }
-
-  .group:hover .hero-btn-bg {
-    transform: translateY(0);
-  }
-
-  .hero-btn-text {
-    @apply relative font-light tracking-widest uppercase text-sm transition-colors;
-  }
-
-  .hero-btn-outline .hero-btn-text {
-    @apply text-primary group-hover:text-primary-foreground;
-  }
-
-  .hero-btn-primary .hero-btn-text {
-    @apply text-primary-foreground;
+  .navbar-scrolled {
+    @apply bg-background/95 backdrop-blur-md border-b border-primary/20;
   }
 }
 
-/* ===== UTILITIES ===== */
+/* ===============================
+   UTILITIES
+================================ */
 @layer utilities {
   .perspective-1000 {
     perspective: 1000px;
@@ -165,7 +124,9 @@
   .preserve-3d {
     transform-style: preserve-3d;
   }
+}
 
+@layer utilities {
   .animate-fade-in {
     animation: fadeIn 0.6s ease-out forwards;
     opacity: 0;
@@ -204,5 +165,96 @@
     50% {
       transform: translateY(-10px);
     }
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply relative font-light text-sm tracking-widest uppercase
+           text-foreground/80 hover:text-primary
+           transition-colors duration-300;
+  }
+
+  .nav-link::after {
+    content: "";
+    @apply absolute left-0 -bottom-1 w-0 h-px bg-primary
+           transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .mobile-link {
+    @apply block font-light text-lg tracking-widest uppercase
+           text-foreground/80 hover:text-primary
+           transition-colors py-2;
+  }
+}
+
+
+@layer components {
+  .hero-subtitle {
+    @apply text-primary font-light tracking-[0.3em] uppercase
+           text-sm md:text-base mb-6;
+  }
+
+  .hero-title {
+    @apply font-serif text-5xl md:text-7xl lg:text-8xl mb-6;
+  }
+
+  .hero-divider {
+    @apply w-32 h-px mx-auto mb-8;
+    background: linear-gradient(
+      to right,
+      transparent,
+      hsl(var(--primary)),
+      transparent
+    );
+  }
+
+  .hero-description {
+    @apply text-foreground/80 font-light text-lg md:text-xl
+           max-w-2xl mx-auto mb-12 leading-relaxed;
+  }
+
+  /* ===== CTA BUTTONS ===== */
+
+  .hero-btn-outline {
+    @apply relative px-8 py-4 overflow-hidden
+           border border-primary/50
+           transition-colors duration-300;
+  }
+
+  .hero-btn-primary {
+    @apply relative px-8 py-4 overflow-hidden
+           bg-primary;
+  }
+
+  .hero-btn-bg {
+    @apply absolute inset-0 translate-y-full
+           transition-transform duration-300;
+    background: hsl(var(--primary));
+  }
+
+  .hero-btn-primary .hero-btn-bg {
+    background: hsl(var(--gold-light));
+  }
+
+  .group:hover .hero-btn-bg {
+    transform: translateY(0);
+  }
+
+  .hero-btn-text {
+    @apply relative font-light tracking-widest uppercase
+           text-sm transition-colors duration-300;
+  }
+
+  .hero-btn-outline .hero-btn-text {
+    @apply text-primary group-hover:text-primary-foreground;
+  }
+
+  .hero-btn-primary .hero-btn-text {
+    @apply text-primary-foreground;
   }
 }

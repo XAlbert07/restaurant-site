@@ -1,45 +1,55 @@
 const navbar = document.getElementById("navbar");
 const menuBtn = document.getElementById("menu-btn");
 const mobileMenu = document.getElementById("mobile-menu");
-const menuIcon = document.getElementById("menu-icon");
 
-// ===============================
-// SCROLL EFFECT 
-// ===============================
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 50) {
+let isOpen = false;
+
+
+function updateNavbarState() {
+  if (window.scrollY > 50 || isOpen) {
     navbar.classList.add("navbar-scrolled");
   } else {
     navbar.classList.remove("navbar-scrolled");
   }
-});
+}
+
+
+window.addEventListener("scroll", updateNavbarState);
 
 // ===============================
 // MOBILE MENU TOGGLE
 // ===============================
 menuBtn.addEventListener("click", (e) => {
   e.stopPropagation();
-  mobileMenu.classList.toggle("hidden");
+  isOpen = !isOpen;
+
+  if (isOpen) {
+    mobileMenu.classList.remove("hidden");
+  } else {
+    mobileMenu.classList.add("hidden");
+  }
+
+  updateNavbarState();
 });
 
-// ===============================
-// CLOSE MOBILE MENU ON LINK CLICK
-// ===============================
+
 document.querySelectorAll("#mobile-menu a").forEach((link) => {
   link.addEventListener("click", () => {
+    isOpen = false;
     mobileMenu.classList.add("hidden");
+    updateNavbarState();
   });
 });
 
-// ===============================
-// CLICK OUTSIDE TO CLOSE
-// ===============================
+
 document.addEventListener("click", (e) => {
   if (
+    isOpen &&
     !mobileMenu.contains(e.target) &&
-    !menuBtn.contains(e.target) &&
-    !mobileMenu.classList.contains("hidden")
+    !menuBtn.contains(e.target)
   ) {
+    isOpen = false;
     mobileMenu.classList.add("hidden");
+    updateNavbarState();
   }
 });

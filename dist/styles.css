@@ -565,11 +565,17 @@ video {
   --secondary-foreground: 45 30% 90%;
   --muted: 20 10% 20%;
   --muted-foreground: 45 15% 55%;
+  --accent: 350 45% 35%;
+  --accent-foreground: 45 30% 95%;
   --border: 43 25% 25%;
+  --input: 20 15% 20%;
   --ring: 43 74% 49%;
+  --radius: 0.5rem;
+  /* Custom tokens */
   --gold: 43 74% 49%;
   --gold-light: 43 80% 65%;
   --gold-dark: 43 70% 35%;
+  /* Gradients */
   --gradient-gold: linear-gradient(
       135deg,
       hsl(var(--gold)),
@@ -590,11 +596,11 @@ body {
   color: hsl(var(--foreground));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Playfair Display", serif;
+  font-family: 'Playfair Display', serif;
 }
 
 .container {
@@ -614,14 +620,30 @@ h1, h2, h3, h4, h5, h6 {
 .text-gradient-gold {
   background: var(--gradient-gold);
   -webkit-background-clip: text;
-  background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .glass-card {
   background: hsl(var(--card) / 0.8);
   backdrop-filter: blur(10px);
   border: 1px solid hsl(var(--gold) / 0.2);
+}
+
+.mobile-link {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: hsl(var(--foreground) / 0.8);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.mobile-link:hover {
+  color: hsl(var(--primary));
 }
 
 .navbar-scrolled {
@@ -684,6 +706,8 @@ h1, h2, h3, h4, h5, h6 {
 .mobile-link:hover {
   color: hsl(var(--primary));
 }
+
+/* ===== CTA BUTTONS ===== */
 
 .group:hover .hero-btn-bg {
   transform: translateY(0);
@@ -1501,13 +1525,25 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* ===== DESIGN TOKENS ===== */
+/* ===============================
+   GOOGLE FONTS
+================================ */
 
-/* ===== BASE ===== */
+/* ===============================
+   DESIGN SYSTEM – RESTAURANT
+================================ */
 
-/* ===== COMPONENTS ===== */
+/* ===============================
+   BASE STYLES
+================================ */
 
-/* ===== UTILITIES ===== */
+/* ===============================
+   COMPONENTS
+================================ */
+
+/* ===============================
+   UTILITIES
+================================ */
 
 .hover\:border-primary:hover {
   border-color: hsl(var(--primary));
